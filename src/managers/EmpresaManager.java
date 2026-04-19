@@ -7,6 +7,22 @@ import java.util.List;
 public class EmpresaManager {
     private List<Empresa> empresas = new ArrayList<>();
     private int proximoId = 1;
+    private final String ARQUIVO = "data/empresas.xml";
+
+    @SuppressWarnings("unchecked")
+    public EmpresaManager() {
+        List<Empresa> dadosCarregados = (List<Empresa>) PersistenceManager.carregar(ARQUIVO);
+        if (dadosCarregados != null) {
+            this.empresas = dadosCarregados;
+            for (Empresa e : empresas) {
+                if (e.getId() >= proximoId) proximoId = e.getId() + 1;
+            }
+        }
+    }
+
+    public void salvarDados() {
+        PersistenceManager.salvar(this.empresas, ARQUIVO);
+    }
 
     public int criarEmpresa(int idDono, String nome, String endereco, String tipoCozinha, UsuarioManager um) {
         Usuario dono = um.getUsuario(idDono);
@@ -58,10 +74,8 @@ public class EmpresaManager {
     }
 
     public String getAtributoEmpresa(int id, String atributo, UsuarioManager um) {
-        // busca pela empresa vem primeiro
         Empresa e = getEmpresa(id);
         
-        // so depois e feita a validacao da string
         if (atributo == null || atributo.trim().isEmpty()) throw new RuntimeException("Atributo invalido");
         
         switch (atributo) {

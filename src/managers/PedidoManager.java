@@ -8,6 +8,22 @@ import java.util.Locale;
 public class PedidoManager {
     private List<Pedido> pedidos = new ArrayList<>();
     private int proximoNumero = 1;
+    private final String ARQUIVO = "data/pedidos.xml";
+
+    @SuppressWarnings("unchecked")
+    public PedidoManager() {
+        List<Pedido> dadosCarregados = (List<Pedido>) PersistenceManager.carregar(ARQUIVO);
+        if (dadosCarregados != null) {
+            this.pedidos = dadosCarregados;
+            for (Pedido p : pedidos) {
+                if (p.getNumero() >= proximoNumero) proximoNumero = p.getNumero() + 1;
+            }
+        }
+    }
+
+    public void salvarDados() {
+        PersistenceManager.salvar(this.pedidos, ARQUIVO);
+    }
 
     public int criarPedido(int idCliente, int idEmpresa, UsuarioManager um) {
         if (um.getUsuario(idCliente) instanceof DonoEmpresa) throw new RuntimeException("Dono de empresa nao pode fazer um pedido");

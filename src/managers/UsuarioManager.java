@@ -7,6 +7,22 @@ import java.util.List;
 public class UsuarioManager {
     private List<Usuario> usuarios = new ArrayList<>();
     private int proximoId = 1;
+    private final String ARQUIVO = "data/usuarios.xml";
+
+    @SuppressWarnings("unchecked")
+    public UsuarioManager() {
+        List<Usuario> dadosCarregados = (List<Usuario>) PersistenceManager.carregar(ARQUIVO);
+        if (dadosCarregados != null) {
+            this.usuarios = dadosCarregados;
+            for (Usuario u : usuarios) {
+                if (u.getId() >= proximoId) proximoId = u.getId() + 1;
+            }
+        }
+    }
+
+    public void salvarDados() {
+        PersistenceManager.salvar(this.usuarios, ARQUIVO);
+    }
 
     public void criarUsuario(String nome, String email, String senha, String endereco, String cpf) {
         validarString(nome, "Nome invalido");

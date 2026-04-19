@@ -8,6 +8,22 @@ import java.util.Locale;
 public class ProdutoManager {
     private List<Produto> produtos = new ArrayList<>();
     private int proximoId = 1;
+    private final String ARQUIVO = "data/produtos.xml";
+
+    @SuppressWarnings("unchecked")
+    public ProdutoManager() {
+        List<Produto> dadosCarregados = (List<Produto>) PersistenceManager.carregar(ARQUIVO);
+        if (dadosCarregados != null) {
+            this.produtos = dadosCarregados;
+            for (Produto p : produtos) {
+                if (p.getId() >= proximoId) proximoId = p.getId() + 1;
+            }
+        }
+    }
+
+    public void salvarDados() {
+        PersistenceManager.salvar(this.produtos, ARQUIVO);
+    }
 
     public int criarProduto(int empresa, String nome, float valor, String categoria) {
         if (nome == null || nome.isEmpty()) throw new RuntimeException("Nome invalido");
