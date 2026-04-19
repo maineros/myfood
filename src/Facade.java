@@ -8,17 +8,32 @@ public class Facade {
     private static PedidoManager pedidoManager = new PedidoManager();
 
     public Facade() {
-        // construtor vazio
+        
     }
 
     public void zerarSistema() {
+        // Aponta para a nova pasta 'data'
+        new java.io.File("data/usuarios.xml").delete();
+        new java.io.File("data/empresas.xml").delete();
+        new java.io.File("data/produtos.xml").delete();
+        new java.io.File("data/pedidos.xml").delete();
+        System.out.println("Arquivos XML antigos apagados da pasta 'data'.");
+
         usuarioManager = new UsuarioManager();
         empresaManager = new EmpresaManager();
         produtoManager = new ProdutoManager();
         pedidoManager = new PedidoManager();
+        System.out.println("Sistema zerado na memoria.");
     }
 
-    public void encerrarSistema() {}
+    public void encerrarSistema() {
+        System.out.println("Encerrando o sistema e salvando os dados em XML...");
+        usuarioManager.salvarDados();
+        empresaManager.salvarDados();
+        produtoManager.salvarDados();
+        pedidoManager.salvarDados();
+        System.out.println("Dados salvos com sucesso!");
+    }
 
     // user story 1
     public void criarUsuario(String nome, String email, String senha, String endereco) {
@@ -26,11 +41,8 @@ public class Facade {
     }
     
     public void criarUsuario(String nome, String email, String senha, String endereco, String cpf) {
-        // ao receber um cpf vazio, e forcada uma string vazia pra validacao estourar
-        if (cpf == null) {
-            cpf = "";
-        }
-        this.usuarioManager.criarUsuario(nome, email, senha, endereco, cpf);
+        if (cpf == null) cpf = "";
+        usuarioManager.criarUsuario(nome, email, senha, endereco, cpf);
     }
 
     public int login(String email, String senha) {
