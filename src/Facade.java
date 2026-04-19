@@ -26,7 +26,11 @@ public class Facade {
     }
     
     public void criarUsuario(String nome, String email, String senha, String endereco, String cpf) {
-        usuarioManager.criarUsuario(nome, email, senha, endereco, cpf);
+        // ao receber um cpf vazio, e forcada uma string vazia pra validacao estourar
+        if (cpf == null) {
+            cpf = "";
+        }
+        this.usuarioManager.criarUsuario(nome, email, senha, endereco, cpf);
     }
 
     public int login(String email, String senha) {
