@@ -56,6 +56,7 @@ public class UsuarioManager {
         switch (atributo) {
             case "nome": return u.getNome();
             case "email": return u.getEmail();
+            case "senha": return u.getSenha();
             case "endereco": return u.getEndereco();
             case "cpf": 
                 if (u instanceof DonoEmpresa) return ((DonoEmpresa) u).getCpf();
