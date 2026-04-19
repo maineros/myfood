@@ -58,9 +58,12 @@ public class EmpresaManager {
     }
 
     public String getAtributoEmpresa(int id, String atributo, UsuarioManager um) {
+        // busca pela empresa vem primeiro
+        Empresa e = getEmpresa(id);
+        
+        // so depois e feita a validacao da string
         if (atributo == null || atributo.trim().isEmpty()) throw new RuntimeException("Atributo invalido");
         
-        Empresa e = getEmpresa(id);
         switch (atributo) {
             case "nome": return e.getNome();
             case "endereco": return e.getEndereco();
