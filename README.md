@@ -44,13 +44,13 @@ easyaccept.jar      # biblioteca de testes de aceitação (fornecido pelo docent
 mkdir bin
 
 # compilar todos os pacotes
-javac -cp "easyaccept.jar" -d bin src/*.java src/models/*.java src/managers/*.java
+javac -cp "lib\easyaccept.jar" -d bin src\*.java src\models\*.java src\managers\*.java
 ```
 
 ### Execução dos Testes
 Para rodar a bateria completa de testes através da classe `Main`:
 ```bash
-java -cp "bin:easyaccept.jar" Main
+java -cp "bin:lib\easyaccept.jar" Main
 ```
 *OBS: No Windows, utilize `;` em vez de `:` no comando acima.*
 
