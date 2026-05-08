@@ -31,7 +31,7 @@ public class EmpresaManager {
         if (endereco == null || endereco.trim().isEmpty()) throw new RuntimeException("Endereco da empresa invalido");
     }
 
-    // US 2: Criar Restaurante
+    // user story 2
     public int criarEmpresa(String tipoEmpresa, int idDono, String nome, String endereco, String tipoCozinha, UsuarioManager um) {
         validarDadosBasicos(tipoEmpresa, nome, endereco);
         validarRegrasComuns(idDono, nome, endereco, um);
@@ -39,7 +39,7 @@ public class EmpresaManager {
         return persistirEmpresa(e);
     }
 
-    // US 5: Criar Mercado
+    // user story 5
     public int criarEmpresa(String tipoEmpresa, int idDono, String nome, String endereco, String abre, String fecha, String tipoMercado, UsuarioManager um) {
         validarDadosBasicos(tipoEmpresa, nome, endereco);
         EmpresaFactory.validarHorarios(abre, fecha); // Atualizado, sem o true!

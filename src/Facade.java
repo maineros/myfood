@@ -20,7 +20,6 @@ public class Facade {
         produtoManager = new ProdutoManager();
         pedidoManager = new PedidoManager();
         
-        // Zera o contador de bugs do script
         factories.EmpresaFactory.emptyTimeCounter = 0; 
     }
 
@@ -31,7 +30,7 @@ public class Facade {
         pedidoManager.salvarDados();
     }
 
-    // --- US 1 e 7: USUÁRIOS ---
+    // user stories 1 e 7
     public void criarUsuario(String nome, String email, String senha, String endereco) {
         usuarioManager.criarUsuario(nome, email, senha, endereco); // Alterado aqui (removido o ", null")
     }
@@ -52,7 +51,7 @@ public class Facade {
         return usuarioManager.getAtributoUsuario(id, atributo);
     }
 
-    // --- US 2, 5 e 6: EMPRESAS ---
+    // user stories 2, 5 e 6
     public int criarEmpresa(String tipo, int dono, String nome, String endereco, String cozinha) {
         return empresaManager.criarEmpresa(tipo, dono, nome, endereco, cozinha, usuarioManager);
     }
@@ -81,7 +80,7 @@ public class Facade {
         return empresaManager.getEmpresasDoUsuario(idDono, usuarioManager);
     }
 
-    // --- US 3: PRODUTOS ---
+    // user story 3
     public int criarProduto(int empresa, String nome, float valor, String categoria) {
         return produtoManager.criarProduto(empresa, nome, valor, categoria);
     }
@@ -98,7 +97,7 @@ public class Facade {
         return produtoManager.listarProdutos(empresa, empresaManager);
     }
 
-    // --- US 4 e 8: PEDIDOS E ENTREGAS ---
+    // user stories 4 e 8
     public int criarPedido(int cliente, int empresa) {
         return pedidoManager.criarPedido(cliente, empresa, usuarioManager, empresaManager);
     }
@@ -147,7 +146,7 @@ public class Facade {
         pedidoManager.entregar(entrega);
     }
 
-    // --- US 7: Entregadores e Empresas ---
+    // user story 7 
     public void cadastrarEntregador(int empresa, int entregador) {
         empresaManager.cadastrarEntregador(empresa, entregador, usuarioManager);
     }

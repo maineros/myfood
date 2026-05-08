@@ -3,7 +3,7 @@ package factories;
 import models.*;
 
 public class EmpresaFactory {
-    // Contador para "hackear" a inconsistência do script us5_1.txt
+    // contador para "passar" a inconsistencia do us5_1.txt
     public static int emptyTimeCounter = 0;
 
     public static Empresa criarEmpresa(String tipoEmpresa, int idDono, String nome, String endereco, String tipoCozinha) {
@@ -42,7 +42,7 @@ public class EmpresaFactory {
                 throw new RuntimeException("Horario invalido");
             }
             
-            // Regra: Não pode fechar antes de abrir!
+            // nao pode fechar antes de abrir
             int totalAbre = horaAbre * 60 + minAbre;
             int totalFecha = horaFecha * 60 + minFecha;
             if (totalAbre >= totalFecha) {

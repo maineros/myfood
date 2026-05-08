@@ -25,7 +25,7 @@ public class UsuarioManager {
         PersistenceManager.salvar(this.usuarios, ARQUIVO);
     }
 
-    // 1. Criar Cliente (Sem CPF)
+    // criar cliente
     public void criarUsuario(String nome, String email, String senha, String endereco) {
         validarDadosBasicos(nome, email, senha, endereco);
         verificarEmailDuplicado(email);
@@ -35,7 +35,7 @@ public class UsuarioManager {
         usuarios.add(novo);
     }
 
-    // 2. Criar Dono de Empresa (Com CPF)
+    // criar dono de empresa
     public void criarUsuario(String nome, String email, String senha, String endereco, String cpf) {
         validarDadosBasicos(nome, email, senha, endereco);
         
@@ -51,7 +51,7 @@ public class UsuarioManager {
         usuarios.add(novo);
     }
 
-    // 3. Criar Entregador (Com Veículo e Placa)
+    // criar entregador
     public void criarUsuario(String nome, String email, String senha, String endereco, String veiculo, String placa) {
         validarDadosBasicos(nome, email, senha, endereco);
         
