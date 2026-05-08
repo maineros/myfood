@@ -26,27 +26,20 @@ public class ProdutoManager {
     }
 
     public int criarProduto(int empresa, String nome, float valor, String categoria) {
-        if (nome == null || nome.isEmpty()) throw new RuntimeException("Nome invalido");
-        if (valor < 0) throw new RuntimeException("Valor invalido");
-        if (categoria == null || categoria.isEmpty()) throw new RuntimeException("Categoria invalido");
-
+        validarCampos(nome, valor, categoria);
         for (Produto p : produtos) {
             if (p.getIdEmpresa() == empresa && p.getNome().equals(nome)) {
                 throw new RuntimeException("Ja existe um produto com esse nome para essa empresa");
             }
         }
-
-        Produto novo = new Produto(proximoId++, empresa, nome, valor, categoria);
-        produtos.add(novo);
-        return novo.getId();
+        Produto p = new Produto(proximoId++, empresa, nome, valor, categoria);
+        produtos.add(p);
+        return p.getId();
     }
 
-    public void editarProduto(int produtoId, String nome, float valor, String categoria) {
-        if (nome == null || nome.trim().isEmpty()) throw new RuntimeException("Nome invalido");
-        if (valor < 0) throw new RuntimeException("Valor invalido");
-        if (categoria == null || categoria.trim().isEmpty()) throw new RuntimeException("Categoria invalido");
-
-        Produto p = getProduto(produtoId);
+    public void editarProduto(int idProduto, String nome, float valor, String categoria) {
+        validarCampos(nome, valor, categoria);
+        Produto p = getProduto(idProduto);
         p.setNome(nome);
         p.setValor(valor);
         p.setCategoria(categoria);
@@ -78,15 +71,27 @@ public class ProdutoManager {
         throw new RuntimeException("Produto nao cadastrado");
     }
 
-    public String getAtributoProduto(String nome, int idEmpresa, String atributo, EmpresaManager em) {
+    public String getProduto(String nome, int idEmpresa, String atributo, EmpresaManager em) {
+        Produto encontrado = null;
         for (Produto p : produtos) {
             if (p.getIdEmpresa() == idEmpresa && p.getNome().equals(nome)) {
-                if (atributo.equals("valor")) return String.format(Locale.US, "%.2f", p.getValor());
-                if (atributo.equals("categoria")) return p.getCategoria();
-                if (atributo.equals("empresa")) return em.getEmpresa(idEmpresa).getNome();
-                throw new RuntimeException("Atributo nao existe");
+                encontrado = p;
+                break;
             }
         }
-        throw new RuntimeException("Produto nao encontrado");
+        if (encontrado == null) throw new RuntimeException("Produto nao encontrado");
+
+        switch (atributo) {
+            case "valor": return String.format(Locale.US, "%.2f", encontrado.getValor());
+            case "categoria": return encontrado.getCategoria();
+            case "empresa": return em.getEmpresa(idEmpresa).getNome();
+            default: throw new RuntimeException("Atributo nao existe");
+        }
+    }
+
+    private void validarCampos(String nome, float valor, String categoria) {
+        if (nome == null || nome.trim().isEmpty()) throw new RuntimeException("Nome invalido");
+        if (valor < 0) throw new RuntimeException("Valor invalido");
+        if (categoria == null || categoria.trim().isEmpty()) throw new RuntimeException("Categoria invalido");
     }
 }
