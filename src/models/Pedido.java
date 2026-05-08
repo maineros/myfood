@@ -9,6 +9,7 @@ public class Pedido {
     private int idEmpresa;
     private String estado;
     private List<Produto> produtos;
+    private float valorTotal;
 
     // xmldecoder
     public Pedido() {
@@ -23,15 +24,15 @@ public class Pedido {
         this.produtos = new ArrayList<>();
     }
     
-    public float getValorTotal() {
-        float total = 0;
-        if (produtos != null) {
-            for (Produto p : produtos) {
-                total += p.getValor();
-            }
-        }
-        return total;
-    }
+    // public float getValorTotal() {
+    //     float total = 0;
+    //     if (produtos != null) {
+    //         for (Produto p : produtos) {
+    //             total += p.getValor();
+    //         }
+    //     }
+    //     return total;
+    // }
     
     public void adicionarProduto(Produto p) {
         this.produtos.add(p);
@@ -51,4 +52,7 @@ public class Pedido {
 
     public List<Produto> getProdutos() { return produtos; }
     public void setProdutos(List<Produto> produtos) { this.produtos = produtos; }
+
+    public float getValorTotal() { return valorTotal; }
+    public void setValorTotal(float valorTotal) { this.valorTotal = valorTotal; }
 }
