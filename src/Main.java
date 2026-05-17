@@ -22,19 +22,19 @@ public class Main {
         EasyAccept.main(new String[] {facade, "tests/us4_2.txt"});
 
         // testes da user story 5
-        EasyAccept.main(new String[] {"Facade", "tests/us5_1.txt"});
-        EasyAccept.main(new String[] {"Facade", "tests/us5_2.txt"});
+        EasyAccept.main(new String[] {facade, "tests/us5_1.txt"});
+        EasyAccept.main(new String[] {facade, "tests/us5_2.txt"});
 
         // testes da user story 6
-        EasyAccept.main(new String[] {"Facade", "tests/us6_1.txt"});
-        EasyAccept.main(new String[] {"Facade", "tests/us6_2.txt"});
+        EasyAccept.main(new String[] {facade, "tests/us6_1.txt"});
+        EasyAccept.main(new String[] {facade, "tests/us6_2.txt"});
 
         // testes da user story 7
-        EasyAccept.main(new String[] {"Facade", "tests/us7_1.txt"});
-        EasyAccept.main(new String[] {"Facade", "tests/us7_2.txt"});
+        EasyAccept.main(new String[] {facade, "tests/us7_1.txt"});
+        EasyAccept.main(new String[] {facade, "tests/us7_2.txt"});
 
         // testes da user story 8
-        EasyAccept.main(new String[] {"Facade", "tests/us8_1.txt"});
-        EasyAccept.main(new String[] {"Facade", "tests/us8_2.txt"});
+        EasyAccept.main(new String[] {facade, "tests/us8_1.txt"});
+        EasyAccept.main(new String[] {facade, "tests/us8_2.txt"});
     }
 }
