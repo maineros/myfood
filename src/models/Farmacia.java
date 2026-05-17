@@ -1,5 +1,7 @@
 package models;
 
+import exceptions.empresa.EmpresaException;
+
 public class Farmacia extends Empresa {
     private boolean aberto24Horas;
     private int numeroFuncionarios;
@@ -10,6 +12,27 @@ public class Farmacia extends Empresa {
         super(id, idDono, nome, endereco);
         this.aberto24Horas = aberto24Horas;
         this.numeroFuncionarios = numeroFuncionarios;
+    }
+
+    /**
+     * Retorna o valor de atributos específicos da Farmacia.
+     *
+     * @param atributo nome do atributo ("aberto24Horas", "numeroFuncionarios")
+     * @return valor do atributo como String
+     * @throws EmpresaException se o atributo não existir para Farmacia
+     */
+    @Override
+    public String getAtributoEspecifico(String atributo) throws EmpresaException {
+        switch (atributo) {
+            case "aberto24Horas":      return String.valueOf(this.aberto24Horas);
+            case "numeroFuncionarios": return String.valueOf(this.numeroFuncionarios);
+            default: throw new EmpresaException("Atributo invalido");
+        }
+    }
+
+    @Override
+    public boolean isFarmacia() {
+        return true;
     }
 
     public boolean isAberto24Horas() { return aberto24Horas; }
