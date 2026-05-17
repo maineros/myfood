@@ -1,5 +1,7 @@
 package models;
 
+import exceptions.empresa.EmpresaException;
+
 public class Mercado extends Empresa {
     private String abre;
     private String fecha;
@@ -12,6 +14,35 @@ public class Mercado extends Empresa {
         this.abre = abre;
         this.fecha = fecha;
         this.tipoMercado = tipoMercado;
+    }
+
+    /**
+     * Retorna o valor de atributos específicos do Mercado.
+     *
+     * @param atributo nome do atributo ("abre", "fecha", "tipoMercado")
+     * @return valor do atributo como String
+     * @throws EmpresaException se o atributo não existir para Mercado
+     */
+    @Override
+    public String getAtributoEspecifico(String atributo) throws EmpresaException {
+        switch (atributo) {
+            case "abre":        return this.abre;
+            case "fecha":       return this.fecha;
+            case "tipoMercado": return this.tipoMercado;
+            default: throw new EmpresaException("Atributo invalido");
+        }
+    }
+
+    /**
+     * Atualiza os horários de funcionamento do mercado.
+     *
+     * @param abre  novo horário de abertura
+     * @param fecha novo horário de fechamento
+     */
+    @Override
+    public void alterarFuncionamento(String abre, String fecha) {
+        this.abre = abre;
+        this.fecha = fecha;
     }
 
     public String getAbre() { return abre; }
